@@ -166,10 +166,13 @@ int main()
 					Util::SetConsoleColor(COLOR_VALUE::WhiteFore);
 				}
 				else {
+					Util::SetConsoleColor(COLOR_VALUE::AquaFore);
+					std::cout << "(History) Full Code: " << std::endl;
 					Util::SetConsoleColor(COLOR_VALUE::YellowFore);
-					std::cout << "Full Code: " << std::endl;
 					std::cout << historyMac[dig]->stream << std::endl;
+					Util::SetConsoleColor(COLOR_VALUE::AquaFore);
 					std::cout << "Use in HW AirLink : " << std::endl;
+					Util::SetConsoleColor(COLOR_VALUE::YellowFore);
 					std::cout << historyMac[dig]->stream.c_str() + 4 << std::endl;
 					Util::SetConsoleColor(COLOR_VALUE::WhiteFore);
 				}
