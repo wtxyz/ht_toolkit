@@ -35,17 +35,17 @@ void RefreshScreen() {
 	Util::SetConsoleColor(COLOR_VALUE::RedFore);
 	std::cout << "0406";
 	Util::SetConsoleColor(COLOR_VALUE::TealFore);
-	std::cout << " {MAC}";
+	std::cout << " {MAC + 1}";
 	Util::SetConsoleColor(COLOR_VALUE::RedFore);
 	std::cout << " 140C ";
 	Util::SetConsoleColor(COLOR_VALUE::TealFore);
-	std::cout << "{MAC HEX} ";
+	std::cout << "{MAC ASCII} ";
 	Util::SetConsoleColor(COLOR_VALUE::YellowFore);
 	std::cout << tmpCfg.paramex1 << std::endl;
 	Util::SetConsoleColor(COLOR_VALUE::LimeFore);
 	std::cout << "****** ParamEX: ";
 	Util::SetConsoleColor(COLOR_VALUE::YellowFore);
-	std::cout<< tmpCfg.paramex1 << std::endl;
+	std::cout << tmpCfg.paramex1 << std::endl;
 	Util::SetConsoleColor(COLOR_VALUE::LimeFore);
 	std::cout << "****** HW AirLink invite code: b4zd8bz3" << std::endl;
 	//std::cout << "****** Type Reset word to reset NFC template." << std::endl;
@@ -92,13 +92,23 @@ void ResetTempScreen() {
 
 	std::cin >> stCodeTemp;
 
+	for (auto& c : stCodeTemp) c = toupper(c);
+
 	if (trim_copy(stCodeTemp).length() == 1 && stCodeTemp.compare("M") == 0) {
 		Util::SetConsoleColor(COLOR_VALUE::LimeFore);
 		std::cout << "Example:" << std::endl;
-		std::cout << "0332D2022D687720010048003246535200810800552006850414170406A1B2C3D4E5F6140C413142324333443445354636170100" << std::endl;
+		std::cout << "0332D2022D687720010048003246535200810800552006850414170406";
+		Util::SetConsoleColor(COLOR_VALUE::FuchsiaFore);
+		std::cout << "A1B2C3D4E5F6";
+		Util::SetConsoleColor(COLOR_VALUE::LimeFore);
+		std::cout << "140C";
+		Util::SetConsoleColor(COLOR_VALUE::NavyFore);
+		std::cout << "413142324333443445354636";
+		Util::SetConsoleColor(COLOR_VALUE::LimeFore);
+		std::cout << "170100" << std::endl;
 		canRun = false;
 	}
-	else {
+	else if (trim_copy(stCodeTemp).length() > 32) {
 		//Processing....
 		canRun = true;
 		func.ParseConfig(stCodeTemp, tmpCfg);
@@ -130,6 +140,11 @@ int main()
 		std::cin >> mac;
 
 		for (auto& c : mac) c = toupper(c);// to upper case
+
+		if (mac.length() != 12) {
+			std::cout << "Please input valid MAC!!";
+			continue;
+		}
 
 		if (mac.compare("RESET") == 0) {
 			//reset

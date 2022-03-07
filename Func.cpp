@@ -6,6 +6,7 @@
 //#include <rapidjson/document.h>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 //using namespace rapidjson;
 
@@ -46,13 +47,36 @@ int Func::GenerateNFC(const char* streamCode, const char* mac, const char* sn, c
 {
 	int len = strlen(mac);
 
-	char hex_str[4096] = { 0 };
-	convert_hexa(mac, hex_str);
-	std::string macHex = std::string(hex_str);
+	char ascii_str[4096] = { 0 };
+	// hex string to ascii string
+	convert_hexa(mac, ascii_str);
+	std::string macAscii = std::string(ascii_str);
+	// hex string to int
+	unsigned long long macInt = std::stoull(mac, 0, 16);
+	// operation of mac + 1
+	unsigned long long macIntPlusOne = macInt + 1;
+	// int to hex string
+	std::stringstream stream;
+	stream << std::hex << macIntPlusOne;
+	std::string resultHex(stream.str());
+	// padding result to 6 bytes (12 hex number).
+	while (resultHex.size() < 12) {
+		std::string temp = "0";
+		temp.append(resultHex);
+		resultHex = temp;
+	}
+	// lower case string to upper case
+	std::string resultHexUpperCase = "";
+	for (auto& token : resultHex)
+		resultHexUpperCase += toupper(token);
+	//04578BE5219F
+
+	std::string macPlusOne = resultHexUpperCase;// hex -> hex + 1
 
 	std::string split1 = "140C";
 
-	std::string _result = streamCode + std::string(mac) + split1 + macHex + paramEx1;
+	// std::string _result = streamCode + std::string(mac) + split1 + macHex + paramEx1;
+	std::string _result = streamCode + macPlusOne + split1 + macAscii + paramEx1;
 
 	strcpy(result, _result.c_str());
 
