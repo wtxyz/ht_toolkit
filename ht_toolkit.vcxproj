@@ -24,7 +24,7 @@
     <ProjectGuid>{c810b6bf-3338-4587-a9d5-31bc060a7cde}</ProjectGuid>
     <RootNamespace>GenerateNFCStreamCode</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ht_nfc</ProjectName>
+    <ProjectName>ht_toolkit</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
