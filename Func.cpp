@@ -101,7 +101,10 @@ int Func::ParseConfig(std::string src, Config& fg)
 	输出要求：输出目标码流
 	*/
 
-	size_t found = src.find("0406");//find first
+	size_t foundWIFI = src.find("0406");//find first(WiFi==>0406,BLE==>0306)
+	size_t foundBLE = src.find("0306");
+
+	size_t found = std::min(foundWIFI, foundBLE);
 
 	std::string subStreamStr = src.substr(0, found + 4);//stream
 	std::string subLastStr = src.substr(found + 4 + MAC_LENGTH + 4 + 2 * MAC_LENGTH);

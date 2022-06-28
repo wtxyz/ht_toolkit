@@ -27,13 +27,14 @@ void RefreshScreen() {
 
 	ut.ClearScreen();
 	Util::SetConsoleColor(COLOR_VALUE::LimeFore);
-	std::cout << "****** Welcome to Harmony Toolkit for NFC! @Winter" << std::endl;
+	std::cout << "****** Welcome to Harmony Toolkit for NFC!" << std::endl;
+	std::cout << "****** @Winter 2022-06-28 14:28 BUILD." << std::endl;
 	std::cout << "****** Current Parameters:" << std::endl;
 	std::cout << "****** Stream: ";
 	Util::SetConsoleColor(COLOR_VALUE::TealFore);
 	std::cout << tmpCfg.subStream;
 	Util::SetConsoleColor(COLOR_VALUE::RedFore);
-	std::cout << "0406";
+	std::cout << "0X06";
 	Util::SetConsoleColor(COLOR_VALUE::TealFore);
 	std::cout << " {MAC + 1}";
 	Util::SetConsoleColor(COLOR_VALUE::RedFore);
@@ -141,7 +142,7 @@ int main()
 
 		for (auto& c : mac) c = toupper(c);// to upper case
 
-		if (mac.length() != 12) {
+		if (mac[0] != '[' && mac.length() != 12) {
 			std::cout << "Please input valid MAC!!";
 			continue;
 		}
