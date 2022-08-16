@@ -143,19 +143,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Func.cpp" />
+    <ClCompile Include="FilePlatform.cpp" />
+    <ClCompile Include="FuncJson.cpp" />
+    <ClCompile Include="FuncNFC.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="Func.h" />
+    <ClInclude Include="FilePlatform.h" />
+    <ClInclude Include="FuncJson.h" />
+    <ClInclude Include="FuncNFC.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="strings.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.json" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ASCIITable.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
